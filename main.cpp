@@ -4,6 +4,11 @@
 #include <cstdio>
 #include <stdio.h>
 // main() runs in its own thread in the OS
+void print_hello()
+{
+    printf("Hello World");
+    
+}
 
 int main()
 {    
@@ -11,7 +16,9 @@ int main()
     Button *btn = new Button(10,10, 50,50);
     btn->setBackgroundColor(LCD_COLOR_BLACK);
     btn->setBorderColor(LCD_COLOR_RED);
-
+    void (*message) ();
+    message = print_hello;
+    btn->connect(*message);
     Button *btn2 = new Button(60,10,50,50);
     btn2->setBackgroundColor(LCD_COLOR_BLACK);
     btn2->setBorderColor(LCD_COLOR_BLUE);
@@ -34,5 +41,6 @@ int main()
         
     }
 }
+
 
 

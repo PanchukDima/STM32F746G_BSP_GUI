@@ -1,4 +1,6 @@
 #include "Widget.hpp"
+#include <cstdio>
+#include <stdio.h>
 
 
 Button::Button(uint32_t p_x, uint32_t p_y, uint32_t p_height, uint32_t p_width)
@@ -31,21 +33,35 @@ void Button::push()
 {
     BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
     BSP_LCD_FillRect(_x, _y, _width, _height);
+    _function_connected();
+    
 }
 void Button::release()
 {
     BSP_LCD_SetTextColor(_backgroundColor);
     BSP_LCD_FillRect(_x, _y, _width, _height);
+    
 }
 bool Button::pointInObject(uint32_t p_x, uint32_t p_y)
 {
-    if(_x < p_x < _x +_width && _y < p_y < _y + _height)
+    HAL_Delay(100);
+    if(_x <p_x && p_x<(_x+_height)&& _y<p_y && p_y<(_y+_width))//Пока только такая реализация, потом может переделаю
     {
+        
+        push();
+        HAL_Delay(50);
+        release();        
         return true;
     }
     else 
     {
-        return true;
+        release();
+        
+        return false;
     }
     return false;
+}
+void Button::connect(void (*function)())
+{    
+    _function_connected = function;
 }
