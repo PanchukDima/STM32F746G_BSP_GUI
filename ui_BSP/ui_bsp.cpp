@@ -69,6 +69,10 @@ void ui_bsp::touchEvents()
             //BSP_LCD_DrawPixel(TS_State.touchX[0], TS_State.touchY[0], LCD_COLOR_ORANGE);
         } else {
             if (!cleared) {
+                for(int i = 0; i<_currentIndexWidget; i++)
+                {
+                    _Widgets[i]->release();
+                }
                 //BSP_LCD_Clear(LCD_COLOR_BLUE);
                 //sprintf((char*)text, "Touches: 0");
                 //BSP_LCD_DisplayStringAt(0, LINE(0), (uint8_t *)&text, LEFT_MODE);

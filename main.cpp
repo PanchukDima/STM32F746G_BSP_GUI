@@ -14,15 +14,15 @@ int main()
 {    
     ui_bsp *ui = new ui_bsp();
     Button *btn = new Button(10,10, 50,50);
-    btn->setBackgroundColor(LCD_COLOR_BLACK);
-    btn->setBorderColor(LCD_COLOR_RED);
+    //btn->setBackgroundColor(LCD_COLOR_BLACK);
+    //btn->setBorderColor(LCD_COLOR_RED);
     void (*message) ();
     message = print_hello;
     btn->connect(*message);
-    Button *btn2 = new Button(60,10,50,50);
+    Button *btn2 = new Button(62,10,50,50);
     btn2->setBackgroundColor(LCD_COLOR_BLACK);
     btn2->setBorderColor(LCD_COLOR_BLUE);
-
+    btn2->connect(*message);
     ui->setBackgroundColor(LCD_COLOR_WHITE);
 
     ui->addWidget(*btn);

@@ -14,10 +14,9 @@ Button::Button(uint32_t p_x, uint32_t p_y, uint32_t p_height, uint32_t p_width)
 void Button::show() 
 {           
             BSP_LCD_SetTextColor(_backgroundColor);
-            BSP_LCD_FillRect(_x, _y, _width, _height);
+            BSP_LCD_FillRect(_x, _y, _width-1, _height-1);
             BSP_LCD_SetTextColor(_borderColor);
             BSP_LCD_DrawRect(_x, _y, _width, _height);
-            printf("Button");
 }
 
 void Button::setBackgroundColor(uint32_t p_color)
@@ -31,8 +30,10 @@ void Button::setBorderColor(uint32_t p_color)
 }
 void Button::push()
 {
-    BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
+    BSP_LCD_SetTextColor(_pushBackgroundColor);
     BSP_LCD_FillRect(_x, _y, _width, _height);
+    BSP_LCD_SetTextColor(_pushBorderColor);
+    BSP_LCD_DrawRect(_x, _y, _width, _height);
     _function_connected();
     
 }
@@ -44,19 +45,16 @@ void Button::release()
 }
 bool Button::pointInObject(uint32_t p_x, uint32_t p_y)
 {
-    HAL_Delay(100);
+    
     if(_x <p_x && p_x<(_x+_height)&& _y<p_y && p_y<(_y+_width))//Пока только такая реализация, потом может переделаю
     {
         
-        push();
-        HAL_Delay(50);
-        release();        
+        push();              
         return true;
     }
     else 
     {
-        release();
-        
+        release();        
         return false;
     }
     return false;

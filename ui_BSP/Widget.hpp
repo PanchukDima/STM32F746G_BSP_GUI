@@ -1,4 +1,5 @@
 #include "stm32746g_discovery_lcd.h"
+#include <cstdint>
 #include <stdio.h>
 class Widget
 {
@@ -19,6 +20,7 @@ class Button: public Widget //вывести в отдельный файл, н�
         virtual void show();        
         void setBackgroundColor(uint32_t p_color);
         void setBorderColor(uint32_t p_color);
+
         void repaint(){};
         virtual void push();
         virtual void release();
@@ -29,8 +31,10 @@ class Button: public Widget //вывести в отдельный файл, н�
         uint32_t _y;
         uint32_t _width;
         uint32_t _height;
-        uint32_t _backgroundColor;
-        uint32_t _borderColor;
+        uint32_t _backgroundColor = LCD_COLOR_GRAY;
+        uint32_t _borderColor = LCD_COLOR_DARKGRAY;
+        uint32_t _pushBackgroundColor = LCD_COLOR_DARKGRAY;
+        uint32_t _pushBorderColor = LCD_COLOR_GRAY;
         void (*_function_connected) ();
 
         
