@@ -21,7 +21,6 @@ void Button::show()
 
 void Button::setBackgroundColor(uint32_t p_color)
 {
-    
     _backgroundColor = p_color;
 }
 void Button::setBorderColor(uint32_t p_color)
