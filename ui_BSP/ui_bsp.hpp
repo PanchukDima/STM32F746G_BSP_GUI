@@ -16,8 +16,7 @@ class ui_bsp
             _Widgets[_currentIndexWidget]= &p_Widget;
             _currentIndexWidget +=1;
         }
-        void touchEvents();
-        
+        void touchEvents();       
         
     private:
         uint32_t _backgroundColor;

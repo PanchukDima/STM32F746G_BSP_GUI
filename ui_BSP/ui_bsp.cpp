@@ -43,16 +43,10 @@ void ui_bsp::touchEvents()
             // Clear lines corresponding to old touches coordinates
             if (TS_State.touchDetected < prev_nb_touches) {
                 for (idx = (TS_State.touchDetected + 1); idx <= 5; idx++) {
-                    //BSP_LCD_ClearStringLine(idx);
                 }
             }
             prev_nb_touches = TS_State.touchDetected;
-
             cleared = 0;
-
-            //printf((char*)text, "Touches: %d", TS_State.touchDetected);
-            //BSP_LCD_DisplayStringAt(0, LINE(0), (uint8_t *)&text, LEFT_MODE);
-
             for (idx = 0; idx < TS_State.touchDetected; idx++) {
                 x = TS_State.touchX[idx];
                 y = TS_State.touchY[idx];
@@ -61,22 +55,15 @@ void ui_bsp::touchEvents()
                 {
                     _Widgets[i]->pointInObject(x,y);
                 }
-
-                //sprintf((char*)text, "Touch %d: x=%d y=%d    ", idx+1, x, y);
-                //BSP_LCD_DisplayStringAt(0, LINE(idx+1), (uint8_t *)&text, LEFT_MODE);
             }
 
-            //BSP_LCD_DrawPixel(TS_State.touchX[0], TS_State.touchY[0], LCD_COLOR_ORANGE);
-        } else {
+    } else {
             if (!cleared) {
                 for(int i = 0; i<_currentIndexWidget; i++)
                 {
                     _Widgets[i]->release();
                 }
-                //BSP_LCD_Clear(LCD_COLOR_BLUE);
-                //sprintf((char*)text, "Touches: 0");
-                //BSP_LCD_DisplayStringAt(0, LINE(0), (uint8_t *)&text, LEFT_MODE);
-                cleared = 1;
+            cleared = 1;
             }
         }
     }
